@@ -1,8 +1,7 @@
 const path = require('path');
-
-const webpack = require('webpack');
-
 const merge = require('webpack-merge');
+const webpack = require('webpack');
+const NpmInstallPlugin = require('npm-install-webpack-plugin');
 
 const TARGET = process.env.npm_lifecycle_event;
 
@@ -20,6 +19,13 @@ const common = {
     filename: 'bundle.js'
   },
   module: {
+    preLoaders: [
+      {
+        test: /\.jsx?$/,
+        loaders: ['jshint'],
+        include: PATHS.app
+      }
+    ],
     loaders: [
       {
         test: /\.css$/,
