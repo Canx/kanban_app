@@ -14,22 +14,23 @@ const common = {
   entry: {
     app: PATHS.app
   },
+  resolve: {
+    extensions: ['', '.js', '.jsx']
+  },
   output: {
     path: PATHS.build,
     filename: 'bundle.js'
   },
   module: {
-    preLoaders: [
-      {
-        test: /\.jsx?$/,
-        loaders: ['jshint'],
-        include: PATHS.app
-      }
-    ],
     loaders: [
       {
         test: /\.css$/,
         loaders: ['style', 'css'],
+        include: PATHS.app
+      },
+      {
+        test: /\.jsx?$/,
+        loaders: ['babel?cacheDirectory'],
         include: PATHS.app
       }
     ]
